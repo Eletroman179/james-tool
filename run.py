@@ -155,6 +155,7 @@ and dont run with python use CMD
 or some commands will not work
 Type help for help with commands
 perhak does nothing
+this might not work in linux or mac
 """
 perhak = (Fore.LIGHTGREEN_EX+"""
 101101101101011
@@ -263,7 +264,8 @@ def load():
     print(Jt)
     print(Fore.LIGHTCYAN_EX+time.strftime("%I:%M %p"))
     print(time.strftime("%A"))
-    print(time.strftime("%B %d, %Y")+Fore.RESET)
+    print(time.strftime("%B %d, %Y"))
+    print("type info for more info")
     print(Fore.LIGHTRED_EX+"FULLSCREEN NOW"+Fore.RESET)
     default_speaker = sc.default_speaker()
     samples, samplerate = sf.read('boot.wav')
