@@ -11,6 +11,7 @@ import soundfile as sf
 import soundcard as sc
 from alive_progress import alive_bar
 import pyautogui
+name = ""
 Key = False
 try:
     with open ("C:\\Users\\James\\pass\\yes.txt") as file:
@@ -24,6 +25,17 @@ except:
     time.sleep(1)
 pyautogui.hotkey("win", "up")
 pyautogui.hotkey("F11")
+if Key == False:
+    try:
+        with open ("key.txt") as file:
+            name = file.read()
+            print(Fore.RESET+"key found!"+Fore.LIGHTGREEN_EX+"██")
+            time.sleep(1)
+            Key = True
+    except:
+        Key = False
+        print(Fore.RESET+"Key not found!"+Fore.LIGHTRED_EX+"██")
+        time.sleep(1)
 bang = Fore.WHITE+"""
 █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
 █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
