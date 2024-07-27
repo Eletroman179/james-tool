@@ -304,7 +304,7 @@ def JT_setup():
                 if keyboard.is_pressed('y'): 
                     pyautogui.press("backspace")
                     data["off-pass-yn"] = "yes"
-                    break  # finishing the loop
+                    break
                 elif keyboard.is_pressed('n'):
                     pyautogui.press("backspace")
                     data["off-pass-yn"] = "no"
@@ -312,14 +312,33 @@ def JT_setup():
             finally:
                 if data["off-pass-yn"] == "yes":
                     data["off-pass"] = input("password:")
-                    break
+    print("login[y]=yes[n]=no")
+    while True:
+        try:
+            if keyboard.is_pressed('y'):
+                pyautogui.press("backspace")
+                data["login-yn"] = "yes"
+                data["login-user"] = input("login user:")
+                data["login-password"] = input("login password:")
+                break
+            elif keyboard.is_pressed('n'):
+                data["login-yn"] = "no"
+                pass
+        finally:
+            pass
     with open('config.json', 'w') as file:
         json.dump(data, file, indent=4)
 if data["setup"] == "no":
     JT_setup()
 load()
-
-RUN = True
+if data["login-yn"] == "yes":
+    if data["login-user"] == input("user:"):
+        if data["login-password"] == input("password:"):
+            RUN = True
+else:
+    RUN = True
+clean()
+print(Jt)
 while RUN:
     print("\n"+Fore.LIGHTCYAN_EX+platform.system()+"@JAMES TOOL")
     Jt1 = input(Fore.LIGHTRED_EX+"→ "+Fore.RESET)
