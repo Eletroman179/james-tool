@@ -160,6 +160,8 @@ commands = Fore.LIGHTCYAN_EX+"""
 -google
 -cal
 -winoff
+-settings
+-resetup
 -license() for all licenses
 """+Fore.RESET
 info = Fore.LIGHTCYAN_EX+"""
@@ -426,6 +428,10 @@ while RUN:
 
             except:
                 break
+    elif Jt1 == "settings":
+        print("setup ",data["setup"])
+        print("winoff password yes/no ",data["off-pass-yn"])
+        print("winoff password ",data["off-pass"])
     elif Jt1 == "resetup":
         JT_setup()
     elif Jt1 == "info":
