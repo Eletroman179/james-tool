@@ -223,7 +223,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
 def off():
-    os.system("shutdown /s")
+    os.system("-s -t 0 -f")
 def compute():
     print(Fore.LIGHTCYAN_EX+"loading"+Fore.LIGHTRED_EX)
     with alive_bar(10000, bar="smooth", spinner="waves") as bar:
