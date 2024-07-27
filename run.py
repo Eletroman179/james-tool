@@ -316,6 +316,7 @@ def JT_setup():
 if data["setup"] == "no":
     JT_setup()
 load()
+
 RUN = True
 while RUN:
     print("\n"+Fore.LIGHTCYAN_EX+platform.system()+"@JAMES TOOL")

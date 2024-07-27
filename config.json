@@ -1,5 +1,5 @@
 {
-    "setup": "yes",
-    "off-pass-yn": "yes",
-    "off-pass": "james"
+    "setup": "no",
+    "off-pass-yn": "",
+    "off-pass": ""
 }
