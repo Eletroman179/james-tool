@@ -11,6 +11,7 @@ import soundfile as sf
 import soundcard as sc
 from alive_progress import alive_bar
 import pyautogui
+import keyboard
 name = ""
 Key = False
 try:
@@ -157,6 +158,7 @@ commands = Fore.LIGHTCYAN_EX+"""
 -load -g
 -google
 -cal
+-winoff
 -license() for all licenses
 """+Fore.RESET
 info = Fore.LIGHTCYAN_EX+"""
@@ -220,6 +222,15 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
+def off():
+    pyautogui.press("win")
+    pyautogui.press("up")
+    for i in range(10):
+        pyautogui.press("right")
+    pyautogui.press("enter")
+    pyautogui.press("up")
+    pyautogui.press("up")
+    pyautogui.press("enter")
 def compute():
     print(Fore.LIGHTCYAN_EX+"loading"+Fore.LIGHTRED_EX)
     with alive_bar(10000, bar="smooth", spinner="waves") as bar:
@@ -376,6 +387,19 @@ while RUN:
     elif Jt1 == "cal":
         input("press enter continue")
         subprocess.call("calc.exe")
+    elif Jt1 == "winoff":
+        print(Fore.LIGHTRED_EX+"are you sure that you want to turn off your PC [Y]=yes[N]=no")
+        while True:  # making a loop
+            try:  # used try so that if user pressed other than the given key error will not be shown
+                if keyboard.is_pressed('y'):  # if key 'q' is pressed 
+                    off()
+                    break  # finishing the loop
+                elif keyboard.is_pressed('n'):
+                    pyautogui.press("backspace")
+                    break
+
+            except:
+                break
     elif Jt1 == "info":
         print(info)
         if Key == True:
