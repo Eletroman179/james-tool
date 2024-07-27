@@ -12,6 +12,7 @@ import soundcard as sc
 from alive_progress import alive_bar
 import pyautogui
 import keyboard
+import json
 name = ""
 Key = False
 try:
@@ -222,6 +223,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
+with open ("config.json", "r") as f:
+    data = json.load(f)
 def off():
     os.system("shutdown -s -t 0 -f")
 def compute():
@@ -288,8 +291,31 @@ def load():
     default_speaker.play(samples, samplerate=samplerate)
     clean()
     print(Jt)
+def JT_setup():
+    data["setup"] = "no"
+    data["off-pass-yn"] = ""
+    data["off-pass"] = ""
+    data["setup"] = "yes"
+    print("winoff password[y]=yes[n]=no")
+    while True:  # making a loop
+            try:  # used try so that if user pressed other than the given key error will not be shown
+                if keyboard.is_pressed('y'): 
+                    pyautogui.press("backspace")
+                    data["off-pass-yn"] = "yes"
+                    break  # finishing the loop
+                elif keyboard.is_pressed('n'):
+                    pyautogui.press("backspace")
+                    data["off-pass-yn"] = "no"
+                    break
+            finally:
+                if data["off-pass-yn"] == "yes":
+                    data["off-pass"] = input("password:")
+                    break
+    with open('config.json', 'w') as file:
+        json.dump(data, file, indent=4)
+if data["setup"] == "no":
+    JT_setup()
 load()
-
 RUN = True
 while RUN:
     print("\n"+Fore.LIGHTCYAN_EX+platform.system()+"@JAMES TOOL")
@@ -385,7 +411,13 @@ while RUN:
         while True:  # making a loop
             try:  # used try so that if user pressed other than the given key error will not be shown
                 if keyboard.is_pressed('y'): 
-                    off()
+                    pyautogui.press("backspace")
+                    if data["off-pass-yn"] == "yes":
+                        passw = input("password:")
+                        if passw == data["off-pass"]:
+                            off()
+                    else:
+                        off()
                     break  # finishing the loop
                 elif keyboard.is_pressed('n'):
                     pyautogui.press("backspace")
@@ -393,6 +425,8 @@ while RUN:
 
             except:
                 break
+    elif Jt1 == "resetup":
+        JT_setup()
     elif Jt1 == "info":
         print(info)
         if Key == True:
