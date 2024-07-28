@@ -162,6 +162,7 @@ commands = Fore.LIGHTCYAN_EX+"""
 -winoff
 -settings
 -resetup
+-reup
 -license() for all licenses
 """+Fore.RESET
 info = Fore.LIGHTCYAN_EX+"""
@@ -428,6 +429,15 @@ while RUN:
     elif Jt1 == "cal":
         input("press enter continue")
         subprocess.call("calc.exe")
+    elif Jt1 == "reup":
+        data["setup"] = "no"
+        data["off-pass-yn"] = ""
+        data["off-pass"] = ""
+        data["login-yn"] = ""
+        data["login-user"] = ""
+        data["login-password"] = ""
+        with open('config.json', 'w') as file:
+            json.dump(data, file, indent=4)
     elif Jt1 == "winoff":
         print(Fore.LIGHTRED_EX+"are you sure that you want to turn off your PC [Y]=yes[N]=no")
         while True:  # making a loop
