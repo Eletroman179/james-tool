@@ -319,14 +319,14 @@ def JT_setup():
             if keyboard.is_pressed('y'):
                 pyautogui.press("backspace")
                 data["login-yn"] = "yes"
-                data["login-user"] = input("login user:")
-                data["login-password"] = input("login password:")
                 break
             elif keyboard.is_pressed('n'):
                 data["login-yn"] = "no"
-                pass
+                break
         finally:
-            pass
+            if data["login-yn"] == "yes":
+                data["login-user"] = input("login user:")
+                data["login-password"] = input("login password:")
     with open('config.json', 'w') as file:
         json.dump(data, file, indent=4)
 if data["setup"] == "no":
