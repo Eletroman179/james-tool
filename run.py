@@ -344,7 +344,7 @@ clean()
 print(Jt)
 while RUN:
     print("\n"+Fore.LIGHTCYAN_EX+platform.system()+"@JAMES TOOL")
-    Jt1 = input(Fore.LIGHTRED_EX+"→ "+Fore.RESET)
+    Jt1 = input(Fore.LIGHTRED_EX+"↪ "+Fore.RESET)
     default_speaker = sc.default_speaker()
     samples, samplerate = sf.read('done.wav')
     default_speaker.play(samples, samplerate=samplerate)
