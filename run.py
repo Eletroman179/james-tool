@@ -163,6 +163,7 @@ commands = Fore.LIGHTCYAN_EX+"""
 -settings
 -resetup
 -reup
+-bsod
 -license() for all licenses
 """+Fore.RESET
 info = Fore.LIGHTCYAN_EX+"""
@@ -265,7 +266,31 @@ def aum():
     print(bang)
     time.sleep(0.5)
     load()
+def bsod():
+    from ctypes import windll
+    from ctypes import c_int
+    from ctypes import c_uint
+    from ctypes import c_ulong
+    from ctypes import POINTER
+    from ctypes import byref
 
+    nullptr = POINTER(c_int)()
+
+    windll.ntdll.RtlAdjustPrivilege(
+        c_uint(19), 
+        c_uint(1), 
+        c_uint(0), 
+        byref(c_int())
+    )
+
+    windll.ntdll.NtRaiseHardError(
+        c_ulong(0xC000007B), 
+        c_ulong(0), 
+        nullptr, 
+        nullptr, 
+        c_uint(6), 
+        byref(c_uint())
+    )
 def print_slow(str):
     for letter in str:
         sys.stdout.write(letter)
@@ -379,6 +404,8 @@ while RUN:
         time.sleep(0.6)
         clean()
         print(Jt)
+    elif Jt1 == "bsod":
+        bsod()
     elif Jt1 == "perhak":
         clean()
         print_slow(perhak)
