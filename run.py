@@ -38,6 +38,15 @@ if Key == False:
         Key = False
         print(Fore.RESET+"Key not found!"+Fore.LIGHTRED_EX+"██")
         time.sleep(1)
+def resource_path(relative_path):
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS2   
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 bang = Fore.WHITE+"""
 █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
 █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
@@ -227,20 +236,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
-with open ("config.json", "r") as f:
+with open (resource_path("config.json"), "r") as f:
     data = json.load(f)
 def off():
     os.system("shutdown -s -t 0 -f")
 def compute():
-    print(Fore.LIGHTCYAN_EX+"loading"+Fore.LIGHTRED_EX)
-    with alive_bar(10000, bar="smooth", spinner="waves") as bar:
-        for i in range(10000):
-            bar()  
-            time.sleep(0.0005)
-    print(Fore.LIGHTCYAN_EX+"loading completed")
     print(Fore.LIGHTRED_EX+"FULLSCREEN NOW")
     default_speaker = sc.default_speaker()
-    samples, samplerate = sf.read('done.wav')
+    samples, samplerate = sf.read(resource_path('done.wav'))
     default_speaker.play(samples, samplerate=samplerate)
 def clean():
     if os.name == "nt":
@@ -315,7 +318,7 @@ def load():
     print("type info for more info")
     print(Fore.LIGHTRED_EX+"FULLSCREEN NOW"+Fore.RESET)
     default_speaker = sc.default_speaker()
-    samples, samplerate = sf.read('boot.wav')
+    samples, samplerate = sf.read(resource_path('boot.wav'))
     default_speaker.play(samples, samplerate=samplerate)
     clean()
     print(Jt)
@@ -354,7 +357,7 @@ def JT_setup():
                 break
         finally:
             pass
-    with open('config.json', 'w') as file:
+    with open(resource_path('config.json'), 'w') as file:
         json.dump(data, file, indent=4)
 if data["setup"] == "no":
     JT_setup()
@@ -371,7 +374,7 @@ while RUN:
     print("\n"+Fore.LIGHTCYAN_EX+platform.system()+"@JAMES TOOL")
     Jt1 = input(Fore.LIGHTRED_EX+"↪ "+Fore.RESET)
     default_speaker = sc.default_speaker()
-    samples, samplerate = sf.read('done.wav')
+    samples, samplerate = sf.read(resource_path('done.wav'))
     default_speaker.play(samples, samplerate=samplerate)
     if Jt1 == "help":
         print(commands)
@@ -388,7 +391,7 @@ while RUN:
         print(Jt)
     elif Jt1 == "reload":
         default_speaker = sc.default_speaker()
-        samples, samplerate = sf.read('Jt5.wav')
+        samples, samplerate = sf.read(resource_path('Jt5.wav'))
         default_speaker.play(samples, samplerate=samplerate)
         pyautogui.typewrite("//")
         pyautogui.press("enter")
@@ -430,27 +433,27 @@ while RUN:
             print(license())
     elif Jt1 == "plso":
         default_speaker = sc.default_speaker()
-        samples, samplerate = sf.read('boot.wav')
+        samples, samplerate = sf.read(resource_path('boot.wav'))
         default_speaker.play(samples, samplerate=samplerate)
         print("\nplso -short played successfully!\n")
     elif Jt1 == "plso -s":
         default_speaker = sc.default_speaker()
-        samples, samplerate = sf.read('boot.wav')
+        samples, samplerate = sf.read(resource_path('boot.wav'))
         default_speaker.play(samples, samplerate=samplerate)
         print("\nplso -short played successfully!\n")
     elif Jt1 == "plso -f":
         default_speaker = sc.default_speaker()
-        samples, samplerate = sf.read('Jt2.wav')
+        samples, samplerate = sf.read(resource_path('Jt2.wav'))
         default_speaker.play(samples, samplerate=samplerate)
         print("\nplso -full played successfully!\n")
     elif Jt1 == "piao -s":
         default_speaker = sc.default_speaker()
-        samples, samplerate = sf.read('Jt3.wav')
+        samples, samplerate = sf.read(resource_path('Jt3.wav'))
         default_speaker.play(samples, samplerate=samplerate)
         print("\npiao -full played successfully!\n")
     elif Jt1 == "piao -f":
         default_speaker = sc.default_speaker()
-        samples, samplerate = sf.read('Jt4.wav')
+        samples, samplerate = sf.read(resource_path('Jt4.wav'))
         default_speaker.play(samples, samplerate=samplerate)
         print("\npiao -full played successfully!\n")
     elif Jt1 == "load -g":
@@ -465,7 +468,7 @@ while RUN:
         data["login-yn"] = ""
         data["login-user"] = ""
         data["login-password"] = ""
-        with open('config.json', 'w') as file:
+        with open(resource_path('config.json'), 'w') as file:
             json.dump(data, file, indent=4)
     elif Jt1 == "winoff":
         print(Fore.LIGHTRED_EX+"are you sure that you want to turn off your PC [Y]=yes[N]=no")
