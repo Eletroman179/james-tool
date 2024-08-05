@@ -1,8 +1,8 @@
 {
-    "setup": "no",
-    "off-pass-yn": "",
+    "setup": "yes",
+    "off-pass-yn": "no",
     "off-pass": "",
-    "login-yn": "",
+    "login-yn": "no",
     "login-user": "",
     "login-password": ""
 }
