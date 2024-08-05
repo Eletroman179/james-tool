@@ -118,8 +118,10 @@ bang = Fore.WHITE+"""
 █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
 █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
 """+Fore.RESET
-
-Jtold =Fore.LIGHTCYAN_EX+ """
+with open (resource_path("config.json"), "r") as f:
+    data = json.load(f)
+if data["ues-old"] == "yes":
+    Jt =Fore.LIGHTCYAN_EX+ """
 ██████████████████████████████████████████████████████████████████████████████████████████
 ██"""+Fore.LIGHTYELLOW_EX+"""                                                                                      """+Fore.LIGHTCYAN_EX+"""██
 ██"""+Fore.LIGHTYELLOW_EX+"""       ██  █████  ███    ███ ███████ ███████     ████████  ██████   ██████  ██        """+Fore.LIGHTCYAN_EX+"""██
@@ -130,7 +132,8 @@ Jtold =Fore.LIGHTCYAN_EX+ """
 ██"""+Fore.LIGHTYELLOW_EX+"""                                                                                      """+Fore.LIGHTCYAN_EX+"""██
 ██████████████████████████████████████████████████████████████████████████████████████████
 """
-Jt= Fore.LIGHTCYAN_EX+"""
+else:
+    Jt= Fore.LIGHTCYAN_EX+"""
 █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
 ██"""+Fore.LIGHTYELLOW_EX+"""                                                                                                                                                         """+Fore.LIGHTCYAN_EX+"""██
 ██"""+Fore.LIGHTYELLOW_EX+"""                                                                                                                                                         """+Fore.LIGHTCYAN_EX+"""██
@@ -354,6 +357,19 @@ def JT_setup():
             elif keyboard.is_pressed('n'):
                 pyautogui.press("backspace")
                 data["login-yn"] = "no"
+                break
+        finally:
+            pass
+    print("use legacy title[y]=yes[n]=no")
+    while True:
+        try:
+            if keyboard.is_pressed('y'):
+                pyautogui.press("backspace")
+                data["ues-old"] = "yes"
+                break
+            elif keyboard.is_pressed('n'):
+                pyautogui.press("backspace")
+                data["ues-old"] = "no"
                 break
         finally:
             pass

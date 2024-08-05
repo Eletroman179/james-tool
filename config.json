@@ -1,8 +1,9 @@
 {
-    "setup": "yes",
-    "off-pass-yn": "no",
+    "setup": "no",
+    "off-pass-yn": "",
     "off-pass": "",
-    "login-yn": "no",
+    "login-yn": "",
     "login-user": "",
-    "login-password": ""
+    "login-password": "",
+    "ues-old": "yes"
 }
