@@ -118,10 +118,7 @@ bang = Fore.WHITE+"""
 █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
 █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
 """+Fore.RESET
-with open (resource_path("config.json"), "r") as f:
-    data = json.load(f)
-if data["ues-old"] == "yes":
-    Jt =Fore.LIGHTCYAN_EX+ """
+oldJt =Fore.LIGHTCYAN_EX+ """
 ██████████████████████████████████████████████████████████████████████████████████████████
 ██"""+Fore.LIGHTYELLOW_EX+"""                                                                                      """+Fore.LIGHTCYAN_EX+"""██
 ██"""+Fore.LIGHTYELLOW_EX+"""       ██  █████  ███    ███ ███████ ███████     ████████  ██████   ██████  ██        """+Fore.LIGHTCYAN_EX+"""██
@@ -132,8 +129,8 @@ if data["ues-old"] == "yes":
 ██"""+Fore.LIGHTYELLOW_EX+"""                                                                                      """+Fore.LIGHTCYAN_EX+"""██
 ██████████████████████████████████████████████████████████████████████████████████████████
 """
-else:
-    Jt= Fore.LIGHTCYAN_EX+"""
+
+Jt= Fore.LIGHTCYAN_EX+"""
 █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
 ██"""+Fore.LIGHTYELLOW_EX+"""                                                                                                                                                         """+Fore.LIGHTCYAN_EX+"""██
 ██"""+Fore.LIGHTYELLOW_EX+"""                                                                                                                                                         """+Fore.LIGHTCYAN_EX+"""██
@@ -302,6 +299,11 @@ def print_slow(str):
         sys.stdout.write(letter)
         sys.stdout.flush()
         time.sleep(0.1)
+def goto():
+    if data["ues-old"] == "no":
+        print(Jt)
+    elif data["ues-old"]== "yes":
+        print(oldJt)
 def load():
     clean()
     compute()
@@ -314,7 +316,7 @@ def load():
     print(JMAESL)
     time.sleep(0.03)
     clean()
-    print(Jt)
+    goto()
     print(Fore.LIGHTCYAN_EX+time.strftime("%I:%M %p"))
     print(time.strftime("%A"))
     print(time.strftime("%B %d, %Y"))
@@ -324,7 +326,7 @@ def load():
     samples, samplerate = sf.read(resource_path('boot.wav'))
     default_speaker.play(samples, samplerate=samplerate)
     clean()
-    print(Jt)
+    goto()
 def JT_setup():
     data["setup"] = "no"
     data["off-pass-yn"] = ""
@@ -385,7 +387,7 @@ if data["login-yn"] == "yes":
 else:
     RUN = True
 clean()
-print(Jt)
+goto()
 while RUN:
     print("\n"+Fore.LIGHTCYAN_EX+platform.system()+"@JAMES TOOL")
     Jt1 = input(Fore.LIGHTRED_EX+"↪ "+Fore.RESET)
@@ -401,10 +403,10 @@ while RUN:
     elif Jt1 == "EXIT":
         RUN = False
     elif Jt1 == "title":
-        print(Jt)
+        goto()
     elif Jt1 == "del":
         clean()
-        print(Jt)
+        goto()
     elif Jt1 == "reload":
         default_speaker = sc.default_speaker()
         samples, samplerate = sf.read(resource_path('Jt5.wav'))
@@ -422,14 +424,14 @@ while RUN:
         print(bang)
         time.sleep(0.6)
         clean()
-        print(Jt)
+        goto()
     elif Jt1 == "bsod":
         bsod()
     elif Jt1 == "perhak":
         clean()
         print_slow(perhak)
         clean()
-        print(Jt)
+        goto()
     elif Jt1 == "py":
         print(Fore.LIGHTCYAN_EX+"type quit() to exit"+Fore.RESET)
         input(Fore.LIGHTRED_EX+"WARNING I have no control over python press enter"+Fore.LIGHTGREEN_EX)
