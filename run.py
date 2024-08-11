@@ -238,6 +238,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
 with open (resource_path("config.json"), "r") as f:
     data = json.load(f)
+if not platform.system() == "Windows":
+    input("THE COMMANDS BSOF WINOFF WILL NOT WORK PRESS ENTER TO ACKNOWLEDGE \n")
 def off():
     os.system("shutdown -s -t 0 -f")
 def compute():
