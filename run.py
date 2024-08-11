@@ -13,6 +13,7 @@ from alive_progress import alive_bar
 import pyautogui
 import keyboard
 import json
+from pathlib import Path
 name = ""
 Key = False
 try:
@@ -173,6 +174,7 @@ commands = Fore.LIGHTCYAN_EX+"""
 -resetup
 -reup
 -bsod
+-cmd
 -license() for all licenses
 """+Fore.RESET
 info = Fore.LIGHTCYAN_EX+"""
@@ -238,8 +240,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
 with open (resource_path("config.json"), "r") as f:
     data = json.load(f)
-if not platform.system() == "Windows":
-    input("THE COMMANDS BSOF WINOFF WILL NOT WORK PRESS ENTER TO ACKNOWLEDGE \n")
 def off():
     os.system("shutdown -s -t 0 -f")
 def compute():
@@ -301,6 +301,15 @@ def print_slow(str):
         sys.stdout.write(letter)
         sys.stdout.flush()
         time.sleep(0.1)
+def cmd():
+    while True:
+        cmd_input = input(str(Path.cwd()) + ">")
+        if cmd_input == "quit" or cmd_input == "//" or cmd_input == "EXIT":
+            break
+        else:
+            os.system(cmd_input)
+    clean()
+    goto()
 def goto():
     if data["ues-old"] == "no":
         print(Jt)
@@ -451,6 +460,8 @@ while RUN:
             print(JMAESL)
         elif yn == "2":
             print(license())
+    elif Jt1 == "cmd":
+        cmd()
     elif Jt1 == "plso":
         default_speaker = sc.default_speaker()
         samples, samplerate = sf.read(resource_path('boot.wav'))
