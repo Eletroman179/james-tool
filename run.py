@@ -248,9 +248,9 @@ year = datetime.now().year
 num_days = calendar.monthrange(year, month)[1]
 with open (resource_path("config.json"), "r") as f:
     data = json.load(f)
-def cal_31(month):
+def cal_31():
     print(f"""
-      |{month}
+      |{time.strftime("%B %A %d, %Y")}
     ——+———+———+———+———+———+———+———+——
       | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
     ——+———+———+———+———+———+———+———+——
@@ -265,9 +265,9 @@ def cal_31(month):
       |                           |
 
     """)
-def cal_30(month):
+def cal_30():
     print(f"""
-      |{month}
+      |{time.strftime("%B %A %d, %Y")}
     ——+———+———+———+———+———+———+———+——
       | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
     ——+———+———+———+———+———+———+———+——
@@ -282,9 +282,9 @@ def cal_30(month):
       |                           |
 
     """)
-def cal_29(month):
+def cal_29():
     print(f"""
-      |{month}
+      |{time.strftime("%B %A %d, %Y")}
     ——+———+———+———+———+———+———+———+——
       | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
     ——+———+———+———+———+———+———+———+——
@@ -299,9 +299,9 @@ def cal_29(month):
       |                           |
 
     """)
-def cal_28(month):
+def cal_28():
     print(f"""
-      |{month}
+      |{time.strftime("%B %A %d, %Y")}
     ——+———+———+———+———+———+———+———+——
       | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
     ——+———+———+———+———+———+———+———+——
@@ -326,14 +326,14 @@ def days_in_february(year):
     return calendar.monthrange(year, 2)[1]
 def calendar():
     if month == 1 or month == 3 or month == 5 or month == 7 or month == 9 or month == 10 or month == 11 or month == 12:
-        cal_31(my_month)
+        cal_31()
     if month == 4 or month == 6 or month == 8:
-        cal_31(my_month)
+        cal_31()
     if month == 2:
         if num_days == 28:
             cal_28()
         if num_days == 29:
-            cal_29
+            cal_29()
 def off():
     os.system("shutdown -s -t 0 -f")
 def compute():
