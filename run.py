@@ -14,6 +14,9 @@ import pyautogui
 import keyboard
 import json
 from pathlib import Path
+import datetime
+from datetime import datetime
+import calendar
 name = ""
 Key = False
 try:
@@ -238,8 +241,99 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE."""
+my_month = datetime.now()
+month = datetime.now().month
+year = datetime.now().year
+
+num_days = calendar.monthrange(year, month)[1]
 with open (resource_path("config.json"), "r") as f:
     data = json.load(f)
+def cal_31(month):
+    print(f"""
+      |{month}
+    ——+———+———+———+———+———+———+———+——
+      | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+    ——+———+———+———+———+———+———+———+——
+      | 8 | 9 |10 |11 |12 |13 |14 |
+    ——+———+———+———+———+———+———+———+——
+      |15 |16 |17 |18 |19 |20 |21 |
+    ——+———+———+———+———+———+———+———+——
+      |22 |23 |24 |25 |16 |27 |28 |
+    ——+———+———+———+———+———+———+———+——
+      |29 |30 |31 |   |   |   |   |
+    ——+———+———+———+———+———+———+———+——
+      |                           |
+
+    """)
+def cal_30(month):
+    print(f"""
+      |{month}
+    ——+———+———+———+———+———+———+———+——
+      | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+    ——+———+———+———+———+———+———+———+——
+      | 8 | 9 |10 |11 |12 |13 |14 |
+    ——+———+———+———+———+———+———+———+——
+      |15 |16 |17 |18 |19 |20 |21 |
+    ——+———+———+———+———+———+———+———+——
+      |22 |23 |24 |25 |16 |27 |28 |
+    ——+———+———+———+———+———+———+———+——
+      |29 |30 |   |   |   |   |   |
+    ——+———+———+———+———+———+———+———+——
+      |                           |
+
+    """)
+def cal_29(month):
+    print(f"""
+      |{month}
+    ——+———+———+———+———+———+———+———+——
+      | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+    ——+———+———+———+———+———+———+———+——
+      | 8 | 9 |10 |11 |12 |13 |14 |
+    ——+———+———+———+———+———+———+———+——
+      |15 |16 |17 |18 |19 |20 |21 |
+    ——+———+———+———+———+———+———+———+——
+      |22 |23 |24 |25 |16 |27 |28 |
+    ——+———+———+———+———+———+———+———+——
+      |29 |   |   |   |   |   |   |
+    ——+———+———+———+———+———+———+———+——
+      |                           |
+
+    """)
+def cal_28(month):
+    print(f"""
+      |{month}
+    ——+———+———+———+———+———+———+———+——
+      | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+    ——+———+———+———+———+———+———+———+——
+      | 8 | 9 |10 |11 |12 |13 |14 |
+    ——+———+———+———+———+———+———+———+——
+      |15 |16 |17 |18 |19 |20 |21 |
+    ——+———+———+———+———+———+———+———+——
+      |22 |23 |24 |25 |16 |27 |28 |
+    ——+———+———+———+———+———+———+———+——
+      |   |   |   |   |   |   |   |
+    ——+———+———+———+———+———+———+———+——
+      |                           |
+
+    """)
+def days_in_month(year, month):
+    return max(calendar.monthcalendar(year, month)[-1])
+def month_name_to_number(month_name):
+    datetime_object = time.strptime(month_name, "%B")
+    return datetime_object
+def days_in_february(year):
+    # The second element in the tuple is the number of days in the month
+    return calendar.monthrange(year, 2)[1]
+def calendar():
+    if month == 1 or month == 3 or month == 5 or month == 7 or month == 9 or month == 10 or month == 11 or month == 12:
+        cal_31(my_month)
+    if month == 4 or month == 6 or month == 8:
+        cal_31(my_month)
+    if month == 2:
+        if num_days == 28:
+            cal_28()
+        if num_days == 29:
+            cal_29
 def off():
     os.system("shutdown -s -t 0 -f")
 def compute():
@@ -430,6 +524,8 @@ while RUN:
         print(Fore.LIGHTCYAN_EX+time.strftime("%I:%M %p"))
         print(time.strftime("%A"))
         print(time.strftime("%B %d, %Y")+Fore.RESET)
+    elif Jt1 == "test":
+        calendar()
     elif Jt1 == "bang":
         clean()
         print(bang)
@@ -444,10 +540,12 @@ while RUN:
         clean()
         goto()
     elif Jt1 == "py":
-        print(Fore.LIGHTCYAN_EX+"type quit() to exit"+Fore.RESET)
-        input(Fore.LIGHTRED_EX+"WARNING I have no control over python press enter"+Fore.LIGHTGREEN_EX)
-        subprocess.call("python.exe")
-        print(Fore.RESET)
+        while True:
+            py_input = input(">>>")
+            try:
+                exec(py_input)
+            except Exception as e:
+                print(f"An error occurred: {e}")
     elif Jt1 == "google":
         input("close google to continue")
         subprocess.call("C:\Program Files\Google\Chrome\Application\chrome.exe")
