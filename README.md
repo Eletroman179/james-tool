@@ -5,3 +5,5 @@ or some commands will not work
 Type help for help with commands
 perhak does nothing
 this might not work in linux or mac
+
+PLEASE RUN AS ADMIN FOR THE FIRST TIME
