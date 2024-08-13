@@ -178,6 +178,7 @@ commands = Fore.LIGHTCYAN_EX+"""
 -reup
 -bsod
 -cmd
+-calendar
 -license() for all licenses
 """+Fore.RESET
 info = Fore.LIGHTCYAN_EX+"""
@@ -402,8 +403,6 @@ def cmd():
             break
         else:
             os.system(cmd_input)
-    clean()
-    goto()
 def goto():
     if data["ues-old"] == "no":
         print(Jt)
@@ -524,7 +523,7 @@ while RUN:
         print(Fore.LIGHTCYAN_EX+time.strftime("%I:%M %p"))
         print(time.strftime("%A"))
         print(time.strftime("%B %d, %Y")+Fore.RESET)
-    elif Jt1 == "test":
+    elif Jt1 == "calendar":
         calendar()
     elif Jt1 == "bang":
         clean()
@@ -541,7 +540,9 @@ while RUN:
         goto()
     elif Jt1 == "py":
         while True:
-            py_input = input(">>>")
+            py_input = input(">>> ")
+            if py_input == "EXIT" or py_input == "//" or py_input == "quit":
+                break
             try:
                 exec(py_input)
             except Exception as e:
